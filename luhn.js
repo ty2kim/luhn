@@ -7,9 +7,11 @@ const luhn = function(input){
   let arr = [];
   let even = true;
   let sum = 0;
+  let lastDigit = accountStr[accountStr.length - 1];
+  console.log(`Last Digit: ${lastDigit}`);
 
   // From the rightmost digit, which is the check digit, moving left, double the value of every second digit;
-  for(let i = accountStr.length - 1; i >= 0; i--){
+  for(let i = accountStr.length - 2; i >= 0; i--){
     let add = Number(accountStr[i]);
     if(even){
       add = Number(accountStr[i]) * 2;
@@ -36,16 +38,27 @@ const luhn = function(input){
 
   // If the total modulo 10 is equal to 0 (if the total ends in zero)
   // then the number is valid according to the Luhn formula; else it is not valid.
-  if(sum % 10 == 0){
-    console.log("=> valid");
+  // if(sum % 10 == 0){
+  //   console.log("=> valid");
+  // }
+  // else{
+  //   console.log("=> invalid");
+  // }
+  let mult9 = sum * 9;
+  let a = mult9.toString();
+  let checkSum = a[a.length-1];
+  console.log(checkSum);
+
+  if(lastDigit === checkSum){
+    console.log("==> valid");
   }
   else{
-    console.log("=> invalid");
+    console.log("==> invalid");
   }
 }
 
 
 
-const accountNumber = 7992739871;
+const accountNumber = 79927398713;
 const accountNumber2 = 79927398710;
 luhn(accountNumber);
